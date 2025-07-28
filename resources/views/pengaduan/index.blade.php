@@ -54,10 +54,13 @@
                                     session('pelanggan_id'),
                                 )->first();
                             @endphp
-                            @if ($pemasangan->status == 'disetujui')
-                                <a href="{{ route('pengaduan.create') }}" class="btn btn-social btn-sm btn-info">
-                                    <i class="fa fa-plus"></i> Tambah Pengaduan
-                                </a>
+
+                            @if ($pemasangan)
+                                @if ($pemasangan->status == 'disetujui')
+                                    <a href="{{ route('pengaduan.create') }}" class="btn btn-social btn-sm btn-info">
+                                        <i class="fa fa-plus"></i> Tambah Pengaduan
+                                    </a>
+                                @endif
                             @endif
                         @endif
                     </div>
