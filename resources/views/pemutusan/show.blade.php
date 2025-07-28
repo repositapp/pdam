@@ -28,10 +28,12 @@
                                 session('pelanggan_id'),
                             )->first();
                         @endphp
-                        @if ($pemasangan->status == 'disetujui')
-                            <a href="{{ route('pemutusan.create') }}" class="btn btn-social btn-sm btn-info">
-                                <i class="fa fa-plus"></i> Buat Permohonan
-                            </a>
+                        @if ($pemasangan)
+                            @if ($pemasangan->status == 'disetujui')
+                                <a href="{{ route('pemutusan.create') }}" class="btn btn-social btn-sm btn-info">
+                                    <i class="fa fa-plus"></i> Buat Permohonan
+                                </a>
+                            @endif
                         @endif
                     @endif
                 </div>

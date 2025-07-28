@@ -19,7 +19,7 @@
         <div class="box box-info">
             <div class="box-header">
                 <div class="row align-items-center">
-                    <div class="col-md-6">
+                    <div class="col-md-6 align-items-center">
                         <form action="{{ route('pemasangan.index') }}" method="GET" class="form-inline">
                             <div class="form-group">
                                 <input type="text" name="search" class="form-control input-sm"
