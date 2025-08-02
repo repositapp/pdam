@@ -57,21 +57,22 @@
                 <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
                     <h2 class="inner-title">Tentang Kami</h2>
                     <div class="our-story">
-                        <p>Dinas Sosial Kota Baubau merupakan instansi pemerintah daerah yang memiliki peran strategis dalam
-                            meningkatkan kesejahteraan masyarakat, khususnya kelompok rentan seperti anak-anak, lansia,
-                            penyandang disabilitas, serta keluarga kurang mampu. Dinas ini bertugas merumuskan dan
-                            melaksanakan kebijakan di bidang sosial, termasuk penanganan fakir miskin, perlindungan sosial,
-                            rehabilitasi sosial, dan pemberdayaan sosial. Melalui berbagai program bantuan sosial, pelatihan
-                            keterampilan, serta kemitraan dengan lembaga lain, Dinas Sosial turut berkontribusi dalam
-                            mengurangi angka kemiskinan dan meningkatkan taraf hidup masyarakat Kota Baubau.</p>
+                        <p>Perusahaan Umum Daerah (Perumda) Air Minum Tirta Takawa Kabupaten Buton merupakan lembaga
+                            pelayanan publik milik Pemerintah Daerah yang bertugas menyelenggarakan penyediaan dan
+                            pendistribusian air bersih bagi masyarakat Kabupaten Buton. Dengan mengemban misi sosial
+                            sekaligus ekonomi, Perumda Tirta Takawa berkomitmen memberikan pelayanan air minum yang
+                            berkualitas, aman, dan berkesinambungan. Perusahaan ini terus melakukan perbaikan infrastruktur,
+                            penguatan sistem operasional, serta perluasan jaringan pelayanan agar mampu menjangkau seluruh
+                            lapisan masyarakat, termasuk wilayah-wilayah yang masih minim akses air bersih.</p>
 
-                        <p>Sebagai bagian dari pemerintah daerah, Dinas Sosial Kota Baubau juga aktif dalam membangun sistem
-                            pelayanan sosial yang transparan dan akuntabel. Pemanfaatan teknologi informasi seperti sistem
-                            informasi berbasis web digunakan untuk mendukung pendataan, pengawasan, serta penyampaian
-                            informasi kepada publik secara terbuka. Hal ini bertujuan untuk memastikan bahwa bantuan dan
-                            layanan sosial tepat sasaran serta dapat diakses oleh seluruh masyarakat yang membutuhkan.
-                            Dengan pendekatan kolaboratif dan berkelanjutan, Dinas Sosial berkomitmen menjadi garda terdepan
-                            dalam mewujudkan kesejahteraan sosial di Kota Baubau.</p>
+                        <p>Dalam menghadapi tantangan meningkatnya kebutuhan air bersih akibat pertumbuhan penduduk dan
+                            pembangunan daerah, Perumda Air Minum Tirta Takawa Kabupaten Buton terus berinovasi melalui
+                            modernisasi teknologi dan peningkatan kapasitas produksi. Selain itu, perusahaan juga mulai
+                            mengembangkan sistem pelayanan digital guna mempermudah interaksi dan pengaduan pelanggan.
+                            Melalui sinergi dengan pemerintah pusat, lembaga donor, dan mitra swasta, Perumda Tirta Takawa
+                            menargetkan peningkatan kualitas layanan sekaligus keberlanjutan pengelolaan sumber daya air.
+                            Dengan semangat pelayanan prima, perusahaan ini bertekad menjadi penyedia layanan air minum yang
+                            handal, profesional, dan berorientasi pada kepuasan masyarakat.</p>
                     </div>
                 </div>
             </div>
