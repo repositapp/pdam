@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PermohonanPemasanganBaruMail;
+use App\Mail\StatusPemasanganBerubahMail;
+use App\Mail\StatusPermohonanMail;
 use App\Models\Pelanggan;
 use App\Models\Pemasangan;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class PemasanganController extends Controller
 {
@@ -61,7 +66,11 @@ class PemasanganController extends Controller
         $validatedData['status'] = 'pending';
         $validatedData['status_pembayaran'] = false;
 
-        Pemasangan::create($validatedData);
+        $pemasangan = Pemasangan::create($validatedData);
+
+        // Kirim email notifikasi ke admin
+        $email_target = 'olshoppenjualan@gmail.com';
+        Mail::to($email_target)->send(new PermohonanPemasanganBaruMail($pemasangan));
 
         if (Auth::user()->role == 'admin') {
             return redirect()->route('pemasangan.index')->with('success', 'Data permohonan pemasangan berhasil ditambahkan.');
@@ -141,6 +150,8 @@ class PemasanganController extends Controller
         $validatedData = $request->validate($rules, [
             'alasan_ditolak.required_if' => 'Alasan penolakan wajib diisi jika status ditolak.',
         ]);
+        $statusLama = $pemasangan->status;
+        $statusBaru = $validatedData['status'];
 
         // Jika status berubah menjadi 'disetujui', buat nomor sambungan
         if ($validatedData['status'] === 'disetujui' && $pemasangan->status !== 'disetujui') {
@@ -171,9 +182,16 @@ class PemasanganController extends Controller
                 // Update nomor sambungan di tabel pelanggan
                 $pelanggan = $pemasangan->pelanggan;
                 $pelanggan->nomor_sambungan = $kodeSambungan;
+                $pelanggan->user->email;
                 $pelanggan->save();
 
                 DB::commit();
+
+                if ($statusLama !== $statusBaru) {
+                    Mail::to($pemasangan->pelanggan->user->email)
+                        ->send(new StatusPermohonanMail($pemasangan, $statusLama, $statusBaru));
+                }
+
                 return redirect()->route('pemasangan.index')->with('success', 'Data permohonan pemasangan berhasil diperbarui dan nomor sambungan telah dibuat.');
             } catch (\Exception $e) {
                 DB::rollback();
@@ -182,6 +200,13 @@ class PemasanganController extends Controller
         } else {
             // Jika status tidak disetujui atau tidak berubah, update biasa
             $pemasangan->update($validatedData);
+
+            // Kirim email notifikasi ke pelanggan jika status berubah
+
+            if ($statusLama !== $statusBaru) {
+                Mail::to($pemasangan->pelanggan->user->email)->send(new StatusPermohonanMail($pemasangan, $statusLama, $statusBaru));
+            }
+
             return redirect()->route('pemasangan.index')->with('success', 'Data permohonan pemasangan berhasil diperbarui.');
         }
     }

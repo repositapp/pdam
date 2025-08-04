@@ -127,7 +127,7 @@
     }
 }
 
-.info-box {
+/* .info-box {
     display: block;
     min-height: 70px;
     background: #fff;
@@ -155,7 +155,7 @@
 .info-box-content {
     padding: 10px 10px;
     margin-left: 80px;
-}
+} */
 
 .callout.callout-info {
     background-color: #ffffff !important;

@@ -30,7 +30,7 @@ return [
     |
     | Supported: "smtp", "sendmail", "mailgun", "ses",
     |            "postmark", "log", "array", "failover"
-    |
+    | 'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
     */
 
     'mailers' => [
