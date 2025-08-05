@@ -69,7 +69,7 @@ class PemasanganController extends Controller
         $pemasangan = Pemasangan::create($validatedData);
 
         // Kirim email notifikasi ke admin
-        $email_target = 'olshoppenjualan@gmail.com';
+        $email_target = 'degitaoksiyanti11@gmail.com';
         Mail::to($email_target)->send(new PermohonanPemasanganBaruMail($pemasangan));
 
         if (Auth::user()->role == 'admin') {
