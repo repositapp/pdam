@@ -49,6 +49,7 @@
                             <th scope="col">Telepon</th>
                             <th scope="col">No. Sambungan</th>
                             <th scope="col">KTP</th>
+                            <th scope="col">Kartu Keluarga</th>
                             <th class="text-center" style="width: 80px">Aksi</th>
                         </tr>
                     </thead>
@@ -82,6 +83,27 @@
                                         <span>-</span>
                                     @endif
                                 </td>
+                                <td>
+                                    @if ($pelanggan->file_kk)
+                                        @php
+                                            $extension = pathinfo(
+                                                public_path('storage/' . $pelanggan->file_kk),
+                                                PATHINFO_EXTENSION,
+                                            );
+                                        @endphp
+                                        @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png']))
+                                            <a href="{{ asset('storage/' . $pelanggan->file_kk) }}" target="_blank">Lihat
+                                                Gambar</a>
+                                        @elseif(strtolower($extension) === 'pdf')
+                                            <a href="{{ asset('storage/' . $pelanggan->file_kk) }}" target="_blank">Lihat
+                                                PDF</a>
+                                        @else
+                                            <span>File tidak dikenali</span>
+                                        @endif
+                                    @else
+                                        <span>-</span>
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     <div class="btn-group d-flex">
                                         <a href="{{ route('pelanggan.edit', $pelanggan->id) }}"
@@ -98,7 +120,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="text-center">
+                                <td colspan="9" class="text-center">
                                     Data pelanggan tidak ditemukan.
                                 </td>
                             </tr>

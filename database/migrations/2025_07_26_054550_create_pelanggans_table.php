@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nomor_telepon');
             $table->string('nomor_sambungan')->nullable();
             $table->string('file_ktp')->nullable(); // Gambar atau PDF
+            $table->string('file_kk')->nullable(); // Gambar atau PDF
             $table->timestamps();
         });
     }

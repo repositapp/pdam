@@ -103,9 +103,16 @@ class AuthController extends Controller
 
             if ($request->file('file_ktp')) {
                 $file = $request->file('file_ktp');
-                $fileName = time() . '-' . Str::slug($validatedData['nama_pelanggan']) . '.' . $file->getClientOriginalExtension();
+                $fileName = 'ktp-' . time() . '-' . Str::slug($validatedData['nama_pelanggan']) . '.' . $file->getClientOriginalExtension();
                 $file->storeAs('dokumen-file', $fileName);
                 $validatedData['file_ktp'] = 'dokumen-file/' . $fileName;
+            }
+
+            if ($request->file('file_kk')) {
+                $file = $request->file('file_kk');
+                $fileName = 'kartu-keluarga-' . time() . '-' . Str::slug($validatedData['nama_pelanggan']) . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('dokumen-file', $fileName);
+                $validatedData['file_kk'] = 'dokumen-file/' . $fileName;
             }
 
             $validatedData['user_id'] = $user->id;

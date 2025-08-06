@@ -62,6 +62,8 @@
                             <th scope="col">No. Sambungan</th>
                             <th scope="col">Deskripsi</th>
                             <th scope="col">Jumlah Tunggakan</th>
+                            <th scope="col">KTP</th>
+                            <th scope="col">Kartu Keluarga</th>
                             <th scope="col">Status</th>
                             <th class="text-center" style="width: 80px">Aksi</th>
                         </tr>
@@ -74,6 +76,52 @@
                                 <td>{{ $pemutusan->pelanggan->nomor_sambungan ?? '-' }}</td>
                                 <td>{{ Str::limit($pemutusan->deskripsi, 50) }}</td>
                                 <td>Rp {{ number_format($pemutusan->jumlah_tunggakan, 2, ',', '.') }}</td>
+                                <td>
+                                    @if ($pemutusan->pelanggan->file_ktp)
+                                        @php
+                                            $extension = pathinfo(
+                                                public_path('storage/' . $pemutusan->pelanggan->file_ktp),
+                                                PATHINFO_EXTENSION,
+                                            );
+                                        @endphp
+                                        @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png']))
+                                            <a href="{{ asset('storage/' . $pemutusan->pelanggan->file_ktp) }}"
+                                                target="_blank">Lihat
+                                                Gambar</a>
+                                        @elseif(strtolower($extension) === 'pdf')
+                                            <a href="{{ asset('storage/' . $pemutusan->pelanggan->file_ktp) }}"
+                                                target="_blank">Lihat
+                                                PDF</a>
+                                        @else
+                                            <span>File tidak dikenali</span>
+                                        @endif
+                                    @else
+                                        <span>-</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($pemutusan->pelanggan->file_kk)
+                                        @php
+                                            $extension = pathinfo(
+                                                public_path('storage/' . $pemutusan->pelanggan->file_kk),
+                                                PATHINFO_EXTENSION,
+                                            );
+                                        @endphp
+                                        @if (in_array(strtolower($extension), ['jpg', 'jpeg', 'png']))
+                                            <a href="{{ asset('storage/' . $pemutusan->pelanggan->file_kk) }}"
+                                                target="_blank">Lihat
+                                                Gambar</a>
+                                        @elseif(strtolower($extension) === 'pdf')
+                                            <a href="{{ asset('storage/' . $pemutusan->pelanggan->file_kk) }}"
+                                                target="_blank">Lihat
+                                                PDF</a>
+                                        @else
+                                            <span>File tidak dikenali</span>
+                                        @endif
+                                    @else
+                                        <span>-</span>
+                                    @endif
+                                </td>
                                 <td>
                                     @if ($pemutusan->status == 'pending')
                                         <span class="label label-warning">Pending</span>
@@ -103,7 +151,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center">
+                                <td colspan="9" class="text-center">
                                     Data permohonan pemutusan tidak ditemukan.
                                 </td>
                             </tr>

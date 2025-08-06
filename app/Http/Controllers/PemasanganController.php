@@ -79,9 +79,13 @@ class PemasanganController extends Controller
         }
     }
 
-    public function show(Request $request)
+    public function show(string $id)
     {
-        $pemasangan = Pemasangan::where('pelanggan_id', session('pelanggan_id'))->first();
+        if (Auth::user()->role == 'admin') {
+            $pemasangan = Pemasangan::findOrFail($id);
+        } elseif (Auth::user()->role == 'pelanggan') {
+            $pemasangan = Pemasangan::where('pelanggan_id', session('pelanggan_id'))->first();
+        }
 
         return view('pemasangan.show', compact('pemasangan'));
     }

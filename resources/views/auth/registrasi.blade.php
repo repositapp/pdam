@@ -111,8 +111,21 @@
                 <div class="form-group has-feedback">
                     <input type="file" class="form-control @error('file_ktp') is-invalid @enderror" id="file_ktp"
                         name="file_ktp" accept=".jpg,.jpeg,.png,.pdf">
-                    <small class="text-danger">Ukuran File Maksimal 2MB berekstensi .jpg, .jpeg, .png, .pdf</small>
+                    <small class="text-danger">File KTP ukuran File Maksimal 2MB berekstensi .jpg, .jpeg, .png,
+                        .pdf</small>
                     @error('file_ktp')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group has-feedback">
+                    <input type="file" class="form-control @error('file_kk') is-invalid @enderror" id="file_kk"
+                        name="file_kk" accept=".jpg,.jpeg,.png,.pdf">
+                    <small class="text-danger">File Kartu Keluarga Ukuran File Maksimal 2MB berekstensi .jpg, .jpeg,
+                        .png, .pdf</small>
+                    @error('file_kk')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

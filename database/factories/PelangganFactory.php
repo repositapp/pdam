@@ -24,7 +24,8 @@ class PelangganFactory extends Factory
             'nomor_telepon' => $this->faker->phoneNumber(),
             'nomor_sambungan' => mt_rand(01, 99) . '.' . mt_rand(01, 99) . '.' . mt_rand(00001, 00100),
             // 'nomor_sambungan' akan diisi saat pemasangan disetujui
-            'file_ktp' => null, // Bisa diisi dengan path file contoh jika diperlukan
+            'file_ktp' => 'dokumen-file/dokumen-1.pdf', // Bisa diisi dengan path file contoh jika diperlukan
+            'file_kk' => 'dokumen-file/dokumen-1.pdf', // Bisa diisi dengan path file contoh jika diperlukan
         ];
     }
 }
