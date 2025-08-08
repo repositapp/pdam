@@ -26,7 +26,7 @@ class TagihanFactory extends Factory
         $total_tagihan = $biaya_administrasi + $biaya_air;
 
         return [
-            'pelanggan_id' => Pelanggan::factory(), // Membuat pelanggan baru jika belum ada
+            'pelanggan_id' => mt_rand(1, 9), // Membuat pelanggan baru jika belum ada
             'periode' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-01'), // Awal bulan
             'meter_awal' => $meter_awal,
             'meter_akhir' => $meter_akhir,

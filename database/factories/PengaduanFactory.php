@@ -18,7 +18,7 @@ class PengaduanFactory extends Factory
     public function definition(): array
     {
         return [
-            'pelanggan_id' => Pelanggan::factory(), // Membuat pelanggan baru jika belum ada
+            'pelanggan_id' => mt_rand(1, 9), // Membuat pelanggan baru jika belum ada
             'deskripsi' => $this->faker->sentence(),
             'lokasi' => $this->faker->latitude() . ',' . $this->faker->longitude(), // Format latitude,longitude
             'status' => $this->faker->randomElement(['pending', 'proses', 'selesai']),

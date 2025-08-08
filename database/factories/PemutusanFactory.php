@@ -24,7 +24,7 @@ class PemutusanFactory extends Factory
         $jumlah_tunggakan = $status !== 'disetujui' ? $this->faker->randomFloat(2, 0, 5000000) : 0;
 
         return [
-            'pelanggan_id' => Pelanggan::factory(), // Membuat pelanggan baru jika belum ada
+            'pelanggan_id' => mt_rand(1, 9), // Membuat pelanggan baru jika belum ada
             'deskripsi' => $this->faker->sentence(),
             'lokasi' => $this->faker->latitude() . ',' . $this->faker->longitude(), // Format latitude,longitude
             'jumlah_tunggakan' => $jumlah_tunggakan,

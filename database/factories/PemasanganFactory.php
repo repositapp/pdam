@@ -26,7 +26,7 @@ class PemasanganFactory extends Factory
         if ($tanggal_bayar || $this->faker->boolean(50)) $status = $this->faker->randomElement(['disetujui', 'ditolak']);
 
         return [
-            'pelanggan_id' => Pelanggan::factory(), // Membuat pelanggan baru jika belum ada
+            'pelanggan_id' => mt_rand(1, 9), // Membuat pelanggan baru jika belum ada
             'deskripsi' => $this->faker->sentence(),
             'lokasi' => $this->faker->latitude() . ',' . $this->faker->longitude(), // Format latitude,longitude
             'tanggal_permohonan' => $tanggal_permohonan->format('Y-m-d'),
