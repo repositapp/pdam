@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             'status' => '1',
             'created_at' => now(),
         ]);
-        User::factory(29)->create();
+        User::factory(8)->create();
 
         Aplikasi::updateOrCreate([
             'nama_lembaga' => 'Perusahaan Umum Daerah Air Minum Tirta Takawa',

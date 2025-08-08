@@ -13,7 +13,6 @@ class PemasanganSeeder extends Seeder
      */
     public function run(): void
     {
-        // Membuat 25 data pemasangan contoh
-        Pemasangan::factory()->count(30)->create();
+        Pemasangan::factory()->count(9)->create();
     }
 }
