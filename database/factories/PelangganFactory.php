@@ -17,7 +17,7 @@ class PelangganFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => mt_rand(2, 31),
+            'user_id' => mt_rand(2, 10),
             'nama_pelanggan' => $this->faker->name(),
             'jenis_kelamin' => $this->faker->randomElement(['L', 'P']),
             'alamat' => $this->faker->address(),
