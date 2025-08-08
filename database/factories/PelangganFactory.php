@@ -22,7 +22,7 @@ class PelangganFactory extends Factory
             'jenis_kelamin' => $this->faker->randomElement(['L', 'P']),
             'alamat' => $this->faker->address(),
             'nomor_telepon' => $this->faker->phoneNumber(),
-            'nomor_sambungan' => '0' . mt_rand(1, 5) . '.0.' . mt_rand(1, 5) . '.0000' . mt_rand(1, 9),
+            'nomor_sambungan' => '0' . mt_rand(1, 5) . '.0' . mt_rand(1, 5) . '.0000' . mt_rand(1, 9),
             // 'nomor_sambungan' akan diisi saat pemasangan disetujui
             'file_ktp' => 'dokumen-file/dokumen-1.pdf', // Bisa diisi dengan path file contoh jika diperlukan
             'file_kk' => 'dokumen-file/dokumen-1.pdf', // Bisa diisi dengan path file contoh jika diperlukan
