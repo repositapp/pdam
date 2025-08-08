@@ -481,7 +481,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>{{ $tagihanTerbaru->periode->format('F Y') }}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($tagihanTerbaru->periode)->translatedFormat('d F Y') }}
+                                                        </td>
                                                         <td>{{ number_format($tagihanTerbaru->volume_air, 0, ',', '.') }}
                                                         </td>
                                                         <td>Rp
@@ -536,7 +537,8 @@
                                                 <tbody>
                                                     @foreach ($tagihanTerakhir as $tagihan)
                                                         <tr>
-                                                            <td>{{ $tagihan->periode->format('M Y') }}</td>
+                                                            <td>{{ \Carbon\Carbon::parse($tagihan->periode)->translatedFormat('M Y') }}
+                                                            </td>
                                                             <td>{{ number_format($tagihan->volume_air, 0, ',', '.') }}</td>
                                                             <td>Rp
                                                                 {{ number_format($tagihan->total_tagihan, 2, ',', '.') }}
@@ -680,7 +682,8 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>{{ $pengaduanTerbaru->created_at->format('d/m/Y') }}</td>
+                                                        <td>{{ \Carbon\Carbon::parse($pengaduanTerbaru->created_at)->translatedFormat('d F Y') }}
+                                                        </td>
                                                         <td>{{ Str::limit($pengaduanTerbaru->deskripsi, 30) }}</td>
                                                         <td>
                                                             @if ($pengaduanTerbaru->status == 'pending')
