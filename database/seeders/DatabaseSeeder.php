@@ -8,8 +8,13 @@ use App\Models\Aplikasi;
 use App\Models\Halaman;
 use App\Models\Kategori;
 use App\Models\Menu;
+use App\Models\Pelanggan;
 use App\Models\Pengumuman;
 use App\Models\User;
+use Database\Seeders\PemasanganSeeder;
+use Database\Seeders\PemutusanSeeder;
+use Database\Seeders\PengaduanSeeder;
+use Database\Seeders\TagihanSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -43,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'created_at' => now(),
         ]);
         User::factory(8)->create();
+        Pelanggan::factory(9)->create();
 
         Aplikasi::updateOrCreate([
             'nama_lembaga' => 'Perusahaan Umum Daerah Air Minum Tirta Takawa',
@@ -357,11 +363,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            PelangganSeeder::class,
-            TagihanSeeder::class,
-            PengaduanSeeder::class,
+            // PelangganSeeder::class,
             PemasanganSeeder::class,
+            PengaduanSeeder::class,
             PemutusanSeeder::class,
+            TagihanSeeder::class,
         ]);
     }
 }
