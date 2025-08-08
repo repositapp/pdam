@@ -13,6 +13,6 @@ class TagihanSeeder extends Seeder
      */
     public function run(): void
     {
-        Tagihan::factory()->count(30)->create();
+        Tagihan::factory(9)->create();
     }
 }

@@ -14,6 +14,6 @@ class PemutusanSeeder extends Seeder
     public function run(): void
     {
         // Membuat 15 data pemutusan contoh
-        Pemutusan::factory()->count(9)->create();
+        Pemutusan::factory(9)->create();
     }
 }

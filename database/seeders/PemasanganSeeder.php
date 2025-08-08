@@ -13,6 +13,6 @@ class PemasanganSeeder extends Seeder
      */
     public function run(): void
     {
-        Pemasangan::factory()->count(9)->create();
+        Pemasangan::factory(9)->create();
     }
 }

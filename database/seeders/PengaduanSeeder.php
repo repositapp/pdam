@@ -14,6 +14,6 @@ class PengaduanSeeder extends Seeder
     public function run(): void
     {
         // Membuat 30 data pengaduan contoh
-        Pengaduan::factory()->count(30)->create();
+        Pengaduan::factory(9)->create();
     }
 }
