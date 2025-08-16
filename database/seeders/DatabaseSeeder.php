@@ -508,7 +508,12 @@ class DatabaseSeeder extends Seeder
             if ($urutan % 2 === 0) { // setiap 2 pelanggan
                 Pengaduan::create([
                     'pelanggan_id' => $pelanggan->id,
-                    'deskripsi' => 'Air tidak mengalir di rumah pelanggan',
+                    'deskripsi' => $faker->randomElement([
+                        'Air tidak mengalir di rumah pelanggan',
+                        'Air kotor',
+                        'Pipa Bocor',
+                        'Air Mengalir Kecil'
+                    ]),
                     'lokasi' => $faker->address(),
                     'status' => $faker->randomElement(['pending', 'proses', 'selesai']),
                     'alasan_penyelesaian' => 'Masalah teknis sudah diperbaiki',
