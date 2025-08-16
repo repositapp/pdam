@@ -405,7 +405,7 @@ class DatabaseSeeder extends Seeder
 
         // $urutan = 1;
 
-        for ($urutan = 1; $urutan <= 99; $urutan++) {
+        for ($urutan = 1; $urutan <= 200; $urutan++) {
             // Kode wilayah & bagian
             $kodeWilayah = $faker->randomElement(['01', '02', '03', '04', '05']);
             $randBagian  = mt_rand(1, 75);
