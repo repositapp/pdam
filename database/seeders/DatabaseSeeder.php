@@ -23,6 +23,7 @@ use Database\Seeders\TagihanSeeder;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -64,23 +65,415 @@ class DatabaseSeeder extends Seeder
             'file_ktp' => 'dokumen-file/dokumen-1.pdf',
             'file_kk' => 'dokumen-file/dokumen-1.pdf',
         ]);
-        $users = User::factory()->count(200)->create(['role' => 'pelanggan']);
+        // $users = User::factory()->count(200)->create(['role' => 'pelanggan']);
 
-        $urutan = 1;
+        $namaDepanLaki = [
+            // Nama khas Buton & Baubau
+            'La Ode',
+            'La',
+            'La Aba',
+            'La Ana',
+            'La Gani',
+            'La Usa',
+            'La Dika',
+            'La Jaya',
+            'La Bara',
+            'La Taha',
+            'La Nggomi',
+            'La Pasa',
+            'La Ali',
+            'La Dani',
+            'La Roni',
+            'La Sam',
+            'La Baka',
+            'La Dula',
+            'La Cawu',
+            'La Lamu',
+            'La Hadi',
+            'La Amba',
+            'La Madi',
+            'La Muda',
+            'La Ode Rahman',
+            'La Ode Ismail',
+            'La Ode Jamal',
+            'La Ode Karim',
+            'La Ode Hasan',
+            'La Ode Ruslan',
+            'La Ode Fajar',
+            'La Ode Burhan',
+            'La Ode Fadli',
+            'La Ode Sahrul',
+            'La Ode Ridwan',
 
-        foreach ($users as $user) {
+            // Nama populer
+            'Muhammad',
+            'Abdul',
+            'Rahmat',
+            'Sahrul',
+            'Ilham',
+            'Arifin',
+            'Andi',
+            'Syamsuddin',
+            'Ridwan Kamil',
+            'Asrul Bahri',
+            'Hasan Basri',
+            'Jamaluddin',
+            'Faisal',
+            'Imran',
+            'Zulkifli',
+            'Nasir',
+            'Usman',
+            'Bahar',
+            'Amiruddin',
+            'Farhan',
+            'Samsul',
+            'Darmawan',
+            'Rustam',
+            'Anwar',
+            'Burhan',
+            'Haris',
+            'Arman',
+            'Dedi',
+            'Yusuf',
+            'Herman',
+            'Fahri',
+            'Syarif',
+            'Taufik',
+            'Hamka',
+            'Firman',
+            'Adnan',
+            'Saidin',
+            'Irwan',
+            'Ansar',
+            'Muchtar',
+            'Basran',
+            'Rahim',
+
+            // Nama double
+            'Muhammad Rizal',
+            'Muhammad Ikbal',
+            'Muhammad Fadil',
+            'Abdul Wahid',
+            'Abdul Malik',
+            'Rahmatullah',
+            'Andi Baso',
+            'Andi Rahman',
+            'Syamsu Alam',
+            'La Ode Sulaiman',
+            'La Ode Mansur',
+            'La Ode Amir',
+            'La Ode Zainal',
+            'La Ode Nurman'
+        ];
+
+        $namaDepanPerempuan = [
+            // Nama khas Buton & Baubau
+            'Wa Ode',
+            'Wa',
+            'Wa Dila',
+            'Wa Tika',
+            'Wa Sari',
+            'Wa Tini',
+            'Wa Murni',
+            'Wa Lestari',
+            'Wa Aisyah',
+            'Wa Siti',
+            'Wa Rahma',
+            'Wa Jannah',
+            'Wa Nani',
+            'Wa Lili',
+            'Wa Ningsih',
+            'Wa Dini',
+            'Wa Nur',
+            'Wa Lina',
+            'Wa Rina',
+            'Wa Ode Nur',
+            'Wa Ode Aulia',
+            'Wa Ode Fitri',
+            'Wa Ode Fatimah',
+            'Wa Ode Halimah',
+            'Wa Ode Sulastri',
+            'Wa Ode Marwah',
+            'Wa Ode Rahman',
+            'Wa Ode Indah',
+
+            // Nama umum Indonesia
+            'Siti',
+            'Nur',
+            'Aulia',
+            'Rahma',
+            'Fitriani',
+            'Indah',
+            'Hasnawati',
+            'Dewi',
+            'Nursiah',
+            'Rohana',
+            'Marwah',
+            'Rukmini',
+            'Yuliana',
+            'Jannah',
+            'Kartini',
+            'Nadia',
+            'Salsabila',
+            'Fatimah',
+            'Aisyah',
+            'Murni',
+            'Wati',
+            'Siska',
+            'Melati',
+            'Rosdiana',
+            'Salma',
+            'Khairunnisa',
+            'Maya',
+            'Tira',
+            'Nora',
+            'Halima',
+            'Yuliana',
+
+            // Nama double
+            'Siti Nurhaliza',
+            'Siti Aminah',
+            'Siti Zubaidah',
+            'Nuraini',
+            'Nurjannah',
+            'Nurlina',
+            'Dewi Sartika',
+            'Rahmawati',
+            'Indah Permata',
+            'Aulia Rahman',
+            'Rohana Sari',
+            'Wa Ode Nuraini',
+            'Wa Ode Safitri',
+            'Wa Ode Rukmini'
+        ];
+
+        $namaBelakangLaki = [
+            // Belakang khas Baubau & Buton
+            'Samudra',
+            'Ali',
+            'Yusuf',
+            'Hamzah',
+            'Amir',
+            'Karim',
+            'Bahar',
+            'Kadir',
+            'Basri',
+            'Azis',
+            'Said',
+            'Saleh',
+            'Mansur',
+            'Jafar',
+            'Asman',
+            'Hafid',
+            'Ilyas',
+            'Nasir',
+            'Fadli',
+            'Syamsir',
+            'Usman',
+            'Tahir',
+            'Sulaiman',
+            'Haris',
+            'Badar',
+            'Anwar',
+            'Hadi',
+            'Muktar',
+            'Daeng',
+            'Fahri',
+            'Arfan',
+            'Latif',
+            'Zainal',
+            'Salim',
+            'Marzuki',
+            'Hasan',
+            'Nur',
+            'Rasyid',
+            'Akbar',
+            'Faisal',
+            'Hilman',
+            'Suryadi',
+            'Ramadhan',
+            'Fitrah',
+            'Natsir',
+
+            // Belakang nasional umum
+            'Putra',
+            'Putri',
+            'Saputra',
+            'Saputri',
+            'Gunawan',
+            'Wijaya',
+            'Pratama',
+            'Kurniawan',
+            'Santoso',
+            'Taufik',
+            'Hakim',
+            'Adnan',
+            'Pangestu',
+            'Saputra',
+            'Syahrir',
+            'Mahmud',
+            'Rusdi',
+            'Muchtar',
+            'Asnawi',
+            'Yunus',
+            'Akbar',
+            'Sulaiman',
+            'Ibrahim',
+            'Ridha',
+            'Fadli',
+            'Jufri',
+            'Fathur',
+            'Muslim',
+            'Hidayat',
+            'Sirajuddin',
+            'Mustofa',
+            'Ashar'
+        ];
+
+        $namaBelakangPerempuan = [
+            // Belakang khas Buton & Baubau
+            'Wati',
+            'Riani',
+            'Ningsih',
+            'Lestari',
+            'Permata',
+            'Sulastri',
+            'Marwah',
+            'Halimah',
+            'Safitri',
+            'Rukmini',
+            'Munira',
+            'Yuliana',
+            'Kartini',
+            'Salsabila',
+            'Rahmaniar',
+            'Jannah',
+            'Kusuma',
+            'Indriyani',
+            'Rosdiana',
+            'Khairunnisa',
+            'Halima',
+            'Nuraini',
+            'Nurjannah',
+            'Nurlina',
+            'Suryani',
+            'Syahrani',
+            'Astuti',
+            'Melati',
+            'Suryawati',
+            'Nadira',
+            'Wulandari',
+            'Fauziah',
+            'Amalia',
+            'Azizah',
+            'Salma',
+            'Rahmayani',
+            'Laili',
+            'Anggraini',
+            'Sukmawati',
+            'Herlina',
+            'Ratna',
+            'Maysarah',
+            'Putriani',
+            'Wardani',
+            'Sakinah',
+            'Farida',
+            'Munawarah',
+
+            // Belakang umum nasional untuk perempuan
+            'Kartika',
+            'Pratiwi',
+            'Handayani',
+            'Puspita',
+            'Kusumawati',
+            'Hidayati',
+            'Fitriani',
+            'Andayani',
+            'Suryaningrum',
+            'Cahyani',
+            'Yuniarti',
+            'Oktaviani',
+            'Deswita',
+            'Azzahra',
+            'Shafira',
+            'Nuraini',
+            'Widya',
+            'Anggun',
+            'Nurlaili',
+            'Syafrida'
+        ];
+
+        // $urutan = 1;
+
+        for ($urutan = 1; $urutan <= 99; $urutan++) {
             // Kode wilayah & bagian
             $kodeWilayah = $faker->randomElement(['01', '02', '03', '04', '05']);
             $randBagian  = mt_rand(1, 75);
             $kodeBagian  = $randBagian < 10 ? '0' . $randBagian : (string)$randBagian;
             $nomorUrut   = str_pad($urutan, 5, '0', STR_PAD_LEFT);
 
+            // Tentukan jenis kelamin
+            $jenisKelamin = $faker->randomElement(['L', 'P']);
+
+            if ($jenisKelamin === 'L') {
+                $nama = $faker->randomElement($namaDepanLaki) . ' ' . $faker->randomElement($namaBelakangLaki);
+            } else {
+                $nama = $faker->randomElement($namaDepanPerempuan) . ' ' . $faker->randomElement($namaBelakangPerempuan);
+            }
+
+            $usernameBase = Str::of($nama)
+                ->lower()
+                ->replace(['la ode', 'wa ode'], '') // buang gelar agar pendek
+                ->replace(['la ', 'wa '], '')
+                ->slug('');
+            $username = ($usernameBase ?: 'user') . $urutan;           // contoh: laodekarim1, aisyahnur2
+            $email    = $username . '@gmail.com';
+
+            // Buat nomor telepon Indonesia (08xx dst)
+            $prefix = $faker->randomElement(['0812', '0852', '0822', '0857', '0823', '0819']);
+            $randomNumber = str_pad(mt_rand(0, 99999999), 8, '0', STR_PAD_LEFT);
+            $nomorTelepon = $prefix . $randomNumber;
+            // total panjang 12 digit (misalnya 081234567890)
+
+            $user = User::updateOrCreate([
+                'name' => $nama,
+                'username' => $username,
+                'email' => $email,
+                'email_verified_at' => now(),
+                'password' => Hash::make('12345678'),
+                'avatar' => 'users-images/1J7iwiUja9gMqtHL7eIzR6RbaH0rrzZ5buklDQLy.png',
+                'role' => 'pelanggan',
+                'status' => '1',
+                'created_at' => now(),
+            ]);
+
             $pelanggan = Pelanggan::create([
                 'user_id' => $user->id,
-                'nama_pelanggan' => $user->name,
-                'jenis_kelamin' => $faker->randomElement(['L', 'P']),
-                'alamat' => $faker->randomElement(['Jl. Bataraguru', 'Jl. Karya Baru', 'Jl. Anoa', 'Jl. Rusa Bure', 'Jl. Ahmad Yani', 'Jl. Anoa', 'Jl. Erlangga', 'Jl. Pahlawan', 'Jl. Wahidin', 'Jl. Bulawambona', 'Jl. Budi Utomo', 'Jl. Diponegoro', 'Jl. Jambu Mente', 'Jl. Gatot Subroto', 'Jl. Betoambari', 'Jl. Labalawo', 'Jl. Jendral Sudirman', 'Jl. Balai Kota', 'Jl. Protokol', 'Jl. Kihajar Dewantara', 'Jl. Poros Pasar Wajo']),
-                'nomor_telepon' => $faker->phoneNumber(),
+                'nama_pelanggan' => $nama,
+                'jenis_kelamin' => $jenisKelamin,
+                'alamat' => $faker->randomElement([
+                    'Jl. Bataraguru',
+                    'Jl. Karya Baru',
+                    'Jl. Anoa',
+                    'Jl. Rusa Bure',
+                    'Jl. Ahmad Yani',
+                    'Jl. Erlangga',
+                    'Jl. Pahlawan',
+                    'Jl. Wahidin',
+                    'Jl. Bulawambona',
+                    'Jl. Budi Utomo',
+                    'Jl. Diponegoro',
+                    'Jl. Jambu Mente',
+                    'Jl. Gatot Subroto',
+                    'Jl. Betoambari',
+                    'Jl. Labalawo',
+                    'Jl. Jendral Sudirman',
+                    'Jl. Balai Kota',
+                    'Jl. Protokol',
+                    'Jl. Kihajar Dewantara',
+                    'Jl. Poros Pasar Wajo'
+                ]),
+                'nomor_telepon' => $nomorTelepon,
                 'nomor_sambungan' => "{$kodeWilayah}.{$kodeBagian}.{$nomorUrut}",
                 'file_ktp' => 'dokumen-file/dokumen-1.pdf',
                 'file_kk' => 'dokumen-file/dokumen-1.pdf',
@@ -158,7 +551,7 @@ class DatabaseSeeder extends Seeder
                 'pembaca_meter' => $faker->name(),
             ]);
 
-            $urutan++;
+            // $urutan++;
         }
 
 
