@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
             // =========================
             // 4. Tambahkan Pengaduan (hanya beberapa pelanggan)
             // =========================
-            if ($urutan % 10 === 0) { // setiap 10 pelanggan
+            if ($urutan % 5 === 0) { // setiap 5 pelanggan
                 Pengaduan::create([
                     'pelanggan_id' => $pelanggan->id,
                     'deskripsi' => 'Air tidak mengalir di rumah pelanggan',
@@ -125,7 +125,7 @@ class DatabaseSeeder extends Seeder
             // =========================
             // 5. Tambahkan Pemutusan (hanya beberapa pelanggan)
             // =========================
-            if ($urutan % 15 === 0) { // setiap 15 pelanggan
+            if ($urutan % 8 === 0) { // setiap 8 pelanggan
                 Pemutusan::create([
                     'pelanggan_id' => $pelanggan->id,
                     'deskripsi' => 'Pemutusan sambungan karena tunggakan',
