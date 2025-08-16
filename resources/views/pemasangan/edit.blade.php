@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="tanggal_penelitian" class="col-sm-2 control-label">Tanggal Penelitian</label>
+                        <label for="tanggal_penelitian" class="col-sm-2 control-label">Tanggal Survei</label>
                         <div class="col-sm-10">
                             <div class="input-group date">
                                 <div class="input-group-addon">
@@ -167,7 +167,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="spk_tanggal" class="col-sm-2 control-label">Tanggal SPK</label>
+                        <label for="spk_tanggal" class="col-sm-2 control-label">Tanggal Surat Perintah Kerja</label>
                         <div class="col-sm-10">
                             <div class="input-group date">
                                 <div class="input-group-addon">
@@ -186,7 +186,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="spk_nomor" class="col-sm-2 control-label">Nomor SPK</label>
+                        <label for="spk_nomor" class="col-sm-2 control-label">Nomor Surat Perintah Kerja</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control @error('spk_nomor') is-invalid @enderror"
                                 id="spk_nomor" name="spk_nomor" value="{{ old('spk_nomor', $pemasangan->spk_nomor) }}"
@@ -198,7 +198,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="ba_tanggal" class="col-sm-2 control-label">Tanggal B.A</label>
+                        <label for="ba_tanggal" class="col-sm-2 control-label">Tanggal Berita Acara</label>
                         <div class="col-sm-10">
                             <div class="input-group date">
                                 <div class="input-group-addon">
@@ -217,7 +217,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="ba_nomor" class="col-sm-2 control-label">Nomor B.A</label>
+                        <label for="ba_nomor" class="col-sm-2 control-label">Nomor Berita Acara</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control @error('ba_nomor') is-invalid @enderror"
                                 id="ba_nomor" name="ba_nomor" value="{{ old('ba_nomor', $pemasangan->ba_nomor) }}"

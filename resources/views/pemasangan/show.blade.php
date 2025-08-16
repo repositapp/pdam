@@ -87,7 +87,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Tanggal Penelitian</th>
+                                    <th>Tanggal Survei</th>
                                     <td>:
                                         {{ $pemasangan->tanggal_penelitian ? \Carbon\Carbon::parse($pemasangan->tanggal_penelitian)->translatedFormat('d F Y') : '-' }}
                                     </td>
@@ -99,23 +99,23 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>SPK Tanggal</th>
+                                    <th>Tanggal Surat Perintah Kerja</th>
                                     <td>:
                                         {{ $pemasangan->spk_tanggal ? \Carbon\Carbon::parse($pemasangan->spk_tanggal)->translatedFormat('d F Y') : '-' }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>SPK Nomor</th>
+                                    <th>Nomor Surat Perintah Kerja</th>
                                     <td>: {{ $pemasangan->spk_nomor ?? '-' }}</td>
                                 </tr>
                                 <tr>
-                                    <th>B.A Tanggal</th>
+                                    <th>Tanggal Berita Acara</th>
                                     <td>:
                                         {{ $pemasangan->ba_tanggal ? \Carbon\Carbon::parse($pemasangan->ba_tanggal)->translatedFormat('d F Y') : '-' }}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>B.A Nomor</th>
+                                    <th>Nomor Berita Acara</th>
                                     <td>: {{ $pemasangan->ba_nomor ?? '-' }}</td>
                                 </tr>
                                 <tr>
