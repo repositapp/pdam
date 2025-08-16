@@ -34,8 +34,8 @@
                             <p>
                                 {{ Auth::user()->name }} - @if (Auth::user()->role == 'admin')
                                     Administrator
-                                @elseif (Auth::user()->role == 'author')
-                                    Author
+                                @elseif (Auth::user()->role == 'pelanggan')
+                                    Pelanggan
                                 @endif
                                 <small>Akun dibuat pada {{ Auth::user()->created_at->translatedFormat('F Y') }}</small>
                             </p>

@@ -9,12 +9,18 @@ use App\Models\Halaman;
 use App\Models\Kategori;
 use App\Models\Menu;
 use App\Models\Pelanggan;
+use App\Models\Pemasangan;
+use App\Models\Pemutusan;
+use App\Models\Pengaduan;
 use App\Models\Pengumuman;
+use App\Models\Tagihan;
 use App\Models\User;
+use Database\Seeders\PelangganSeeder;
 use Database\Seeders\PemasanganSeeder;
 use Database\Seeders\PemutusanSeeder;
 use Database\Seeders\PengaduanSeeder;
 use Database\Seeders\TagihanSeeder;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,6 +31,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Factory::create();
+
         User::updateOrCreate([
             'name' => 'Administrator',
             'username' => 'admin',
@@ -47,8 +55,115 @@ class DatabaseSeeder extends Seeder
             'status' => '1',
             'created_at' => now(),
         ]);
-        User::factory(8)->create();
-        Pelanggan::factory(9)->create();
+        Pelanggan::updateOrCreate([
+            'user_id' => 2,
+            'nama_pelanggan' => 'Pelanggan',
+            'jenis_kelamin' => 'L',
+            'alamat' => 'Jl. Betoambari',
+            'nomor_telepon' => '081244745858',
+            'file_ktp' => 'dokumen-file/dokumen-1.pdf',
+            'file_kk' => 'dokumen-file/dokumen-1.pdf',
+        ]);
+        $users = User::factory()->count(98)->create(['role' => 'pelanggan']);
+
+        $urutan = 1;
+
+        foreach ($users as $user) {
+            // Kode wilayah & bagian
+            $kodeWilayah = $faker->randomElement(['01', '02', '03', '04', '05']);
+            $randBagian  = mt_rand(1, 20);
+            $kodeBagian  = $randBagian < 10 ? '0' . $randBagian : (string)$randBagian;
+            $nomorUrut   = str_pad($urutan, 5, '0', STR_PAD_LEFT);
+
+            $pelanggan = Pelanggan::create([
+                'user_id' => $user->id,
+                'nama_pelanggan' => $user->name,
+                'jenis_kelamin' => $faker->randomElement(['L', 'P']),
+                'alamat' => $faker->randomElement(['Jl. Bataraguru', 'Jl. Karya Baru', 'Jl. Anoa', 'Jl. Rusa Bure', 'Jl. Ahmad Yani', 'Jl. Anoa', 'Jl. Erlangga', 'Jl. Pahlawan', 'Jl. Wahidin', 'Jl. Bulawambona', 'Jl. Budi Utomo', 'Jl. Diponegoro', 'Jl. Jambu Mente', 'Jl. Gatot Subroto', 'Jl. Betoambari', 'Jl. Labalawo', 'Jl. Jendral Sudirman', 'Jl. Balai Kota', 'Jl. Protokol', 'Jl. Kihajar Dewantara', 'Jl. Poros Pasar Wajo']),
+                'nomor_telepon' => $faker->phoneNumber(),
+                'nomor_sambungan' => "{$kodeWilayah}.{$kodeBagian}.{$nomorUrut}",
+                'file_ktp' => 'dokumen-file/dokumen-1.pdf',
+                'file_kk' => 'dokumen-file/dokumen-1.pdf',
+            ]);
+
+            // =========================
+            // 3. Data Pemasangan (Disetujui Semua)
+            // =========================
+            $spkNomor = sprintf("%02d/VIII/SPKPI/PUDAM/2025", $urutan);
+            $baNomor  = sprintf("%02d/VIII/BAPIL/PUDAM/2025", $urutan);
+
+            Pemasangan::create([
+                'pelanggan_id' => $pelanggan->id,
+                'deskripsi' => 'Permohonan pemasangan sambungan air baru',
+                'lokasi' => $faker->latitude() . ',' . $faker->longitude(),
+                'tanggal_permohonan' => $faker->dateTimeBetween('-1 month', 'now'),
+                'tanggal_penelitian' => $faker->dateTimeBetween('now', '+3 days'),
+                'tanggal_bayar' => $faker->dateTimeBetween('now', '+7 days'),
+                'spk_tanggal' => now()->format('Y-m-d'),
+                'spk_nomor' => $spkNomor,
+                'ba_tanggal' => now()->format('Y-m-d'),
+                'ba_nomor' => $baNomor,
+                'merek_meteran' => $faker->randomElement(['SNI', 'Amico', 'AMB']),
+                'kedudukan' => 1,
+                'status_pembayaran' => true,
+                'status' => 'disetujui',
+            ]);
+
+            // =========================
+            // 4. Tambahkan Pengaduan (hanya beberapa pelanggan)
+            // =========================
+            if ($urutan % 10 === 0) { // setiap 10 pelanggan
+                Pengaduan::create([
+                    'pelanggan_id' => $pelanggan->id,
+                    'deskripsi' => 'Air tidak mengalir di rumah pelanggan',
+                    'lokasi' => $faker->address(),
+                    'status' => $faker->randomElement(['pending', 'proses', 'selesai']),
+                    'alasan_penyelesaian' => 'Masalah teknis sudah diperbaiki',
+                ]);
+            }
+
+            // =========================
+            // 5. Tambahkan Pemutusan (hanya beberapa pelanggan)
+            // =========================
+            if ($urutan % 15 === 0) { // setiap 15 pelanggan
+                Pemutusan::create([
+                    'pelanggan_id' => $pelanggan->id,
+                    'deskripsi' => 'Pemutusan sambungan karena tunggakan',
+                    'lokasi' => $faker->address(),
+                    'jumlah_tunggakan' => 250000,
+                    'status' => $faker->randomElement(['pending', 'proses', 'disetujui']),
+                ]);
+            }
+
+            // =========================
+            // 6. Tambahkan Tagihan (untuk semua pelanggan)
+            // =========================
+            $meterAwal = $faker->numberBetween(0, 50);
+            $meterAkhir = $meterAwal + $faker->numberBetween(10, 50);
+            $volumeAir = $meterAkhir - $meterAwal;
+            $biayaAir = $volumeAir * 2500; // contoh tarif Rp 2500 per m³
+            $biayaAdm = 5000;
+            $total = $biayaAir + $biayaAdm;
+
+            Tagihan::create([
+                'pelanggan_id' => $pelanggan->id,
+                'periode' => $faker->dateTimeBetween('-1 month', 'now'),
+                'meter_awal' => $meterAwal,
+                'meter_akhir' => $meterAkhir,
+                'volume_air' => $volumeAir,
+                'biaya_administrasi' => $biayaAdm,
+                'biaya_air' => $biayaAir,
+                'total_tagihan' => $total,
+                'status_pembayaran' => $faker->boolean(70), // 70% sudah bayar
+                'pembaca_meter' => $faker->name(),
+            ]);
+
+            $urutan++;
+        }
+
+
+        // User::factory(8)->create();
+        // Pelanggan::factory(9)->create();
 
         Aplikasi::updateOrCreate([
             'nama_lembaga' => 'Perusahaan Umum Daerah Air Minum Tirta Takawa',
@@ -362,12 +477,12 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
         ]);
 
-        $this->call([
-            // PelangganSeeder::class,
-            PemasanganSeeder::class,
-            PengaduanSeeder::class,
-            PemutusanSeeder::class,
-            TagihanSeeder::class,
-        ]);
+        // $this->call([
+        //     // PelangganSeeder::class,
+        //     PemasanganSeeder::class,
+        //     PengaduanSeeder::class,
+        //     PemutusanSeeder::class,
+        //     TagihanSeeder::class,
+        // ]);
     }
 }
