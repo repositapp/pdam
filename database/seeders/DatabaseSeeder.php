@@ -64,14 +64,14 @@ class DatabaseSeeder extends Seeder
             'file_ktp' => 'dokumen-file/dokumen-1.pdf',
             'file_kk' => 'dokumen-file/dokumen-1.pdf',
         ]);
-        $users = User::factory()->count(98)->create(['role' => 'pelanggan']);
+        $users = User::factory()->count(200)->create(['role' => 'pelanggan']);
 
         $urutan = 1;
 
         foreach ($users as $user) {
             // Kode wilayah & bagian
             $kodeWilayah = $faker->randomElement(['01', '02', '03', '04', '05']);
-            $randBagian  = mt_rand(1, 20);
+            $randBagian  = mt_rand(1, 75);
             $kodeBagian  = $randBagian < 10 ? '0' . $randBagian : (string)$randBagian;
             $nomorUrut   = str_pad($urutan, 5, '0', STR_PAD_LEFT);
 
@@ -89,8 +89,8 @@ class DatabaseSeeder extends Seeder
             // =========================
             // 3. Data Pemasangan (Disetujui Semua)
             // =========================
-            $spkNomor = sprintf("%02d/VIII/SPKPI/PUDAM/2025", $urutan);
-            $baNomor  = sprintf("%02d/VIII/BAPIL/PUDAM/2025", $urutan);
+            $spkNomor = $urutan . '/VIII/SPKPI/PUDAM/' . $faker->year();
+            $baNomor  = $urutan . '/VIII/BAPIL/PUDAM/' . $faker->year();
 
             Pemasangan::create([
                 'pelanggan_id' => $pelanggan->id,
@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
             // =========================
             // 4. Tambahkan Pengaduan (hanya beberapa pelanggan)
             // =========================
-            if ($urutan % 5 === 0) { // setiap 5 pelanggan
+            if ($urutan % 2 === 0) { // setiap 2 pelanggan
                 Pengaduan::create([
                     'pelanggan_id' => $pelanggan->id,
                     'deskripsi' => 'Air tidak mengalir di rumah pelanggan',
@@ -125,7 +125,7 @@ class DatabaseSeeder extends Seeder
             // =========================
             // 5. Tambahkan Pemutusan (hanya beberapa pelanggan)
             // =========================
-            if ($urutan % 8 === 0) { // setiap 8 pelanggan
+            if ($urutan % 3 === 0) { // setiap 3 pelanggan
                 Pemutusan::create([
                     'pelanggan_id' => $pelanggan->id,
                     'deskripsi' => 'Pemutusan sambungan karena tunggakan',
