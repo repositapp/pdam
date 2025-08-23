@@ -110,12 +110,30 @@
             @if ($statusBaru == 'disetujui')
                 <p><strong>Selamat!</strong> Permohonan pemasangan air Anda telah <span
                         class="status-disetujui"><strong>Disetujui</strong></span>.</p>
+                @if ($pemasangan->tanggal_penelitian)
+                    <p><strong>Tanggal Survei:</strong>
+                        {{ \Carbon\Carbon::parse($pemasangan->tanggal_penelitian)->translatedFormat('d F Y') }}</p>
+                @endif
+                @if ($pemasangan->tanggal_bayar)
+                    <p><strong>Tanggal Pembayaran:</strong>
+                        {{ \Carbon\Carbon::parse($pemasangan->tanggal_bayar)->translatedFormat('d F Y') }}</p>
+                @endif
                 @if ($pemasangan->spk_nomor)
                     <p><strong>SPK Nomor:</strong> {{ $pemasangan->spk_nomor }}</p>
                 @endif
                 @if ($pemasangan->spk_tanggal)
                     <p><strong>SPK Tanggal:</strong>
                         {{ \Carbon\Carbon::parse($pemasangan->spk_tanggal)->translatedFormat('d F Y') }}</p>
+                @endif
+                @if ($pemasangan->ba_nomor)
+                    <p><strong>B.A Nomor:</strong> {{ $pemasangan->ba_nomor }}</p>
+                @endif
+                @if ($pemasangan->ba_tanggal)
+                    <p><strong>B.A Tanggal:</strong>
+                        {{ \Carbon\Carbon::parse($pemasangan->ba_tanggal)->translatedFormat('d F Y') }}</p>
+                @endif
+                @if ($pemasangan->merek_meteran)
+                    <p><strong>Merek Meteran:</strong> {{ $pemasangan->merek_meteran }}</p>
                 @endif
                 <p>Tim teknis kami akan segera menghubungi Anda untuk proses selanjutnya.</p>
             @elseif($statusBaru == 'ditolak')
