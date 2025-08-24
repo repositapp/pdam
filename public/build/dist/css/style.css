@@ -203,7 +203,11 @@
 }
 
 .login-box-body,.register-box-body {
-    background: #fff;
+    background-image: url('../img/login-panel.png');
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     padding: 50px 30px;
     border-top: 0;
     color: #666
